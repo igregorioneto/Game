@@ -28,7 +28,7 @@ public class ASimpleGame extends ApplicationAdapter {
 	private Array<Rectangle> raindrops;
 	private long lastDropTime;
 
-	
+
 	@Override
 	public void create () {
 		// loading dos assets
@@ -140,7 +140,7 @@ public class ASimpleGame extends ApplicationAdapter {
 		}
 
 	}
-	
+
 	@Override
 	public void dispose () {
 		// Descartando todos os recursos nativos
