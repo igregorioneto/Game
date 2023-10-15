@@ -28,6 +28,8 @@ public class GameScreen implements Screen {
     Array<Rectangle> raindrops;
     long lastDropTime;
     int dropsGathered;
+    int points = 0;
+    int life = 3;
 
     public GameScreen(final Drop game) {
         this.game = game;
@@ -91,6 +93,8 @@ public class GameScreen implements Screen {
 
         // Desenhando o balde (bucket)
         game.batch.begin();
+        game.font.draw(game.batch, "Points: " + points, 10, 380);
+        game.font.draw(game.batch, "Life: " + life, 720, 380);
         game.batch.draw(bucketImage, bucket.x, bucket.y);
         // Desenhando as gotas (drops)
         for (Rectangle raindrop:raindrops) {
@@ -135,9 +139,16 @@ public class GameScreen implements Screen {
         for (Iterator<Rectangle> iter = raindrops.iterator(); iter.hasNext();) {
             Rectangle raindrop = iter.next();
             raindrop.y -= 200 * Gdx.graphics.getDeltaTime();
-            if (raindrop.y + 64 < 0 ) iter.remove();
+            if (raindrop.y + 64 < 0 ) {
+                life--;
+                iter.remove();
+                if (life == 0) {
+                    game.setScreen(new GameOverScreen(game, points));
+                }
+            }
             // O overlaps é uma condição para verificar se a gota toca do balde
             if (raindrop.overlaps(bucket)) {
+                points++;
                 dropSound.play();
                 iter.remove();
             }
@@ -168,6 +179,8 @@ public class GameScreen implements Screen {
     @Override
     public void dispose() {
         // Descartando todos os recursos nativos
+        points = 0;
+        life = 3;
         dropImage.dispose();
         bucketImage.dispose();
         dropSound.dispose();
