@@ -31,8 +31,11 @@ public class GameScreen implements Screen {
     int points = 0;
     int life = 3;
 
+    ScreenManager screenManager;
+
     public GameScreen(final Drop game) {
         this.game = game;
+        screenManager = new ScreenManager(this.game);
 
         // loading dos assets
         dropImage = new Texture(Gdx.files.internal("drop.png"));
@@ -143,7 +146,7 @@ public class GameScreen implements Screen {
                 life--;
                 iter.remove();
                 if (life == 0) {
-                    game.setScreen(new GameOverScreen(game, points));
+                    this.screenManager.showGameOverScreen(points);
                 }
             }
             // O overlaps é uma condição para verificar se a gota toca do balde

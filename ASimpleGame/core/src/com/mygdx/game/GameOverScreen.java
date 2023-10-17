@@ -13,9 +13,11 @@ public class GameOverScreen implements Screen {
     int points;
 
     OrthographicCamera camera;
+    ScreenManager screenManager;
 
     public GameOverScreen(Drop game, final int points) {
         this.game = game;
+        screenManager = new ScreenManager(this.game);
         this.points = points;
 
         camera = new OrthographicCamera();
@@ -43,7 +45,7 @@ public class GameOverScreen implements Screen {
 
         // Ao tocar na tela ir para o Menu
         if (Gdx.input.isTouched()) {
-            game.setScreen(new MainMenuScreen(new Drop()));
+            game.setScreen(new MainMenuScreen(game));
         }
 
     }
