@@ -10,6 +10,8 @@ public class Drop extends Game {
     public SpriteBatch batch;
     public BitmapFont font;
     ScreenManager screenManager;
+
+    boolean gameOverFlag = false;
     @Override
     public void create() {
         batch = new SpriteBatch();
@@ -20,6 +22,15 @@ public class Drop extends Game {
 
     public void render() {
         super.render();
+
+        if (gameOverFlag) {
+            screenManager.showMainMenuScreen();
+            gameOverFlag = false;
+        }
+    }
+
+    public void setGameOverFlag(boolean flag) {
+        gameOverFlag = flag;
     }
 
     public void dispose() {
