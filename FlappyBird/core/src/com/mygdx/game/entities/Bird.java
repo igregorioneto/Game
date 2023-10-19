@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.math.Vector2;
 
 import java.awt.*;
 
@@ -12,30 +13,55 @@ public class Bird {
     // Posição do pássaro
     private int x, y;
     // Velocidade vertical do pássaro
-    private float velocityY;
+    private Vector2 velocity;
     // Caixa delimitadora de colisões
     private Rectangle boundingBox;
+
+    // Constantes da Gravidade e Pulo
+    private static final float GRAVITY = 500;
+    private static final float JUMP_STRENGTH = 250;
 
     public Bird() {
         birdTexture = new Texture("assets/sprites/yellowbird-downflap.png");
         x = 100;
         y = 200;
-        velocityY = 0;
+        velocity = new Vector2(0,0);
         boundingBox = new Rectangle(x, y, birdTexture.getWidth(), birdTexture.getHeight());
     }
 
     public void update(float delta) {
         // Atualizar a posição do pássaro com base na velocidade
-        y += velocityY * delta;
+        velocity.y -= GRAVITY * delta;
+
+        // Atualizando a posição do pássaro
+        x += velocity.x * delta;
+        y += velocity.y * delta;
+
+        // Limitando a posição do pássaro
+        if (y < 0) {
+            y = 0;
+            velocity.y = 0;
+        }
+
+        if (y >= 680) {
+            y = 680;
+            velocity.y = 0;
+        }
+
+        boundingBox.x = x;
+        boundingBox.y = y;
     }
 
     public void jump() {
         // Ajustando a velocidade vertical
-        velocityY = 200;
+        velocity.y = JUMP_STRENGTH;
     }
 
     public void draw(SpriteBatch batch) {
-        batch.draw(birdTexture, x, y);
+        float scale = 0.2f;
+        batch.begin();
+        batch.draw(birdTexture, x, y,0,0, birdTexture.getWidth(), birdTexture.getHeight());
+        batch.end();
     }
 
     public int getX() {
@@ -54,7 +80,7 @@ public class Bird {
         return birdTexture;
     }
 
-    public float getVelocityY() {
-        return velocityY;
+    public Vector2 getVelocity() {
+        return velocity;
     }
 }
