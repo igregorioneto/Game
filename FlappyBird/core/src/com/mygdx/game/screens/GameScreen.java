@@ -36,7 +36,7 @@ public class GameScreen implements Screen {
         birdTextures.add(new TextureRegion(new Texture("assets/sprites/yellowbird-midflap.png")));
         birdTextures.add(new TextureRegion(new Texture("assets/sprites/yellowbird-upflap.png")));
 
-        birdAnimation = new BirdAnimation(birdTextures, 0.0f);
+        birdAnimation = new BirdAnimation(birdTextures, 0.3f);
     }
 
     @Override
@@ -44,21 +44,20 @@ public class GameScreen implements Screen {
         draw();
         bird.update(delta);
 
+        birdAnimation.update(delta);
+        batch.begin();
+        float scale = 1.5f; // 2x maior
+        batch.draw(birdAnimation.getFrame(), bird.getX(), bird.getY(), 0, 0, birdAnimation.getFrame().getRegionWidth(), birdAnimation.getFrame().getRegionHeight(), scale, scale, 0);
+        batch.end();
+
         if (Gdx.input.justTouched()) {
             bird.jump();
-            birdAnimation.update(delta);
-            batch.begin();
-            float scale = 1.5f; // 2x maior
-            batch.draw(birdAnimation.getFrame(), bird.getX(), bird.getY(), 0, 0, birdAnimation.getFrame().getRegionWidth(), birdAnimation.getFrame().getRegionHeight(), scale, scale, 0);
-            batch.end();
         }
     }
 
     private void draw() {
         batch.begin();
         batch.draw(background, 0,0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
-        float scale = 1.5f; // 2x maior
-        batch.draw(birdAnimation.getFrame(), bird.getX(), bird.getY(), 0, 0, birdAnimation.getFrame().getRegionWidth(), birdAnimation.getFrame().getRegionHeight(), scale, scale, 0);
         batch.end();
     }
 
