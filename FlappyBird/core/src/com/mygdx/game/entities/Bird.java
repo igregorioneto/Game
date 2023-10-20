@@ -4,6 +4,7 @@ import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import java.awt.*;
@@ -17,21 +18,52 @@ public class Bird {
     // Caixa delimitadora de colisões
     private Rectangle boundingBox;
 
+    // Verificando o estado de queda
+    private boolean emQueda;
+
+    // Tamanho do pássaro
+    private float scale;
+
+    private float angle;
+
+    // Sprites do pássaro
+    private Texture textureBirdDown;
+    private Texture textureBirdMid;
+    private Texture textureBirdUp;
+
+    private int atrasoSprite = 0;
+
     // Constantes da Gravidade e Pulo
     private static final float GRAVITY = 500;
-    private static final float JUMP_STRENGTH = 250;
+    private static final float JUMP_STRENGTH = 350;
 
     public Bird() {
-        birdTexture = new Texture("assets/sprites/yellowbird-downflap.png");
-        x = 100;
-        y = 200;
+        // Iniciando as sprites de forma separadas
+        textureBirdDown = new Texture("assets/sprites/yellowbird-downflap.png");
+        textureBirdMid = new Texture("assets/sprites/yellowbird-midflap.png");
+        textureBirdUp = new Texture("assets/sprites/yellowbird-upflap.png");
+
+        x = 150;
+        y = 300;
+        emQueda = false;
+        scale = 1.5f;
+        angle = 0;
         velocity = new Vector2(0,0);
-        boundingBox = new Rectangle(x, y, birdTexture.getWidth(), birdTexture.getHeight());
+        boundingBox = new Rectangle(x, y, textureBirdDown.getWidth(), textureBirdDown.getHeight());
     }
 
     public void update(float delta) {
         // Atualizar a posição do pássaro com base na velocidade
         velocity.y -= GRAVITY * delta;
+        if (isEmQueda()) {
+            atrasoSprite++;
+            if (atrasoSprite >= 50 && angle > -70) {
+                angle -= 5.0f;
+            }
+        } else {
+            atrasoSprite = 0;
+            angle = 25.0f;
+        }
 
         // Atualizando a posição do pássaro
         x += velocity.x * delta;
@@ -58,7 +90,6 @@ public class Bird {
     }
 
     public void draw(SpriteBatch batch) {
-        float scale = 0.2f;
         batch.begin();
         batch.draw(birdTexture, x, y,0,0, birdTexture.getWidth(), birdTexture.getHeight());
         batch.end();
@@ -82,5 +113,39 @@ public class Bird {
 
     public Vector2 getVelocity() {
         return velocity;
+    }
+
+    public boolean isEmQueda() {
+        return emQueda;
+    }
+
+    public void setEmQueda(boolean emQueda) {
+        this.emQueda = emQueda;
+    }
+
+    public float getScale() {
+        return scale;
+    }
+
+    // Get das Sprites
+
+    public Texture getTextureBirdDown() {
+        return textureBirdDown;
+    }
+
+    public Texture getTextureBirdMid() {
+        return textureBirdMid;
+    }
+
+    public Texture getTextureBirdUp() {
+        return textureBirdUp;
+    }
+
+    public float getAngle() {
+        return angle;
+    }
+
+    public void setAngle(float angle) {
+        this.angle = angle;
     }
 }

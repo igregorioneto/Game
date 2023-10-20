@@ -7,4 +7,7 @@ public class BirdAnimation extends Animation{
     public BirdAnimation(Array<TextureRegion> frameTextures, float cycleTime) {
         super(frameTextures, cycleTime);
     }
+
+    public void setPause(boolean b) {
+    }
 }
