@@ -1,10 +1,7 @@
 package com.mygdx.game.entities;
 
-import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.math.Vector2;
 
 import java.awt.*;
@@ -32,6 +29,8 @@ public class Bird {
     private Texture textureBirdUp;
 
     private int atrasoSprite = 0;
+
+    private int alturaDaBase;
 
     // Constantes da Gravidade e Pulo
     private static final float GRAVITY = 500;
@@ -70,8 +69,9 @@ public class Bird {
         y += velocity.y * delta;
 
         // Limitando a posição do pássaro
-        if (y < 0) {
-            y = 0;
+        if (y < getAlturaDaBase() + 10) {
+            y = getAlturaDaBase() + 10;
+            setAngle(-70);
             velocity.y = 0;
         }
 
@@ -147,5 +147,13 @@ public class Bird {
 
     public void setAngle(float angle) {
         this.angle = angle;
+    }
+
+    public int getAlturaDaBase() {
+        return alturaDaBase;
+    }
+
+    public void setAlturaDaBase(int alturaDaBase) {
+        this.alturaDaBase = alturaDaBase;
     }
 }

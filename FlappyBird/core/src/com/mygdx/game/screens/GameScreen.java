@@ -93,7 +93,7 @@ public class GameScreen implements Screen {
         if (groundX < -base.getWidth()) {
             groundX = 0;
         }
-
+        bird.setAlturaDaBase(base.getHeight());
         batch.begin();
         batch.draw(base, groundX, 0, 400, base.getHeight());
         batch.draw(base, groundX + 400, 0, 400, base.getHeight());
