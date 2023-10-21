@@ -3,12 +3,12 @@ package com.mygdx.game.screens;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
-import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.utils.Array;
 import com.mygdx.game.animations.BirdAnimation;
 import com.mygdx.game.entities.Bird;
@@ -22,6 +22,14 @@ public class GameScreen implements Screen {
     // Criando o chão movimentando
     private float groundX = 0;
     private Texture base;
+
+    // Criando os canos
+    private Texture pipe;
+    private float pipeX1 = Gdx.graphics.getWidth(), pipeX2 = Gdx.graphics.getWidth() + 200;
+    private int contadorIniciarAparecimentoDosCanos = 0;
+    private float alturaMaxima = +100;
+    private float alturaMinima = -100;
+    private float alturaCano1 = 0, alturaCano2 = 0;
 
     private BirdAnimation birdAnimation;
 
@@ -42,6 +50,7 @@ public class GameScreen implements Screen {
     public void show() {
         background = new Texture("assets/sprites/background-day.png");
         base = new Texture("assets/sprites/base.png");
+        pipe = new Texture("assets/sprites/pipe-green.png");
 
         Array<TextureRegion> birdTextures = new Array<>();
         birdTextures.add(new TextureRegion(bird.getTextureBirdDown()));
@@ -53,8 +62,11 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        contadorIniciarAparecimentoDosCanos++;
         draw();
+        drawPipe(delta);
         drawGround(delta);
+
         bird.update(delta);
         float scale = bird.getScale();
         // Desenhando o pássaro
@@ -98,6 +110,28 @@ public class GameScreen implements Screen {
         batch.draw(base, groundX, 0, 400, base.getHeight());
         batch.draw(base, groundX + 400, 0, 400, base.getHeight());
         batch.end();
+    }
+
+    private void drawPipe(float delta) {
+        if (contadorIniciarAparecimentoDosCanos > 80) {
+            pipeX1 -= 200 * delta;
+            pipeX2 -= 200 * delta;
+
+            if (pipeX1 + pipe.getWidth() < 0) {
+                pipeX1 = Gdx.graphics.getWidth();
+                alturaCano1 = MathUtils.random(alturaMinima, alturaMaxima);
+            }
+
+            if (pipeX2 + pipe.getWidth() < 0) {
+                pipeX2 = Gdx.graphics.getWidth();
+                alturaCano2 = MathUtils.random(alturaMinima, alturaMaxima);
+            }
+
+            batch.begin();
+            batch.draw(new TextureRegion(pipe), pipeX1, alturaCano1, pipe.getWidth(), pipe.getHeight(), pipe.getWidth(),pipe.getHeight(),1.5f, 1.5f, 0);
+            batch.draw(new TextureRegion(pipe), pipeX2, alturaCano2, pipe.getWidth(), pipe.getHeight(), pipe.getWidth(),pipe.getHeight(),1.5f, 1.5f, 0);
+            batch.end();
+        }
     }
 
     private void draw() {
