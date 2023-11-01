@@ -1,5 +1,6 @@
 package com.mygdx.game;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Batch;
@@ -18,18 +19,18 @@ public class ActorBeta extends Actor {
     }
 
     public void setTexture(Texture t) {
-        textureRegion.setTexture(t);
-        setSize(t.getWidth(), t.getHeight());
+        textureRegion.setRegion(t);
+        this.setSize(t.getWidth(), t.getHeight());
         rectangle.setSize(t.getWidth(), t.getHeight());
     }
 
     public Rectangle getRectangle() {
-        rectangle.setPosition(getX(), getY());
+        rectangle.setPosition(this.getX(), this.getY());
         return rectangle;
     }
 
     public boolean overlaps(ActorBeta other) {
-        return this.getRectangle().overlaps(other.rectangle);
+        return this.getRectangle().overlaps(other.getRectangle());
     }
 
     public void act(float dt) {
