@@ -9,10 +9,10 @@ import com.badlogic.gdx.scenes.scene2d.Stage;
 public class StarfishCollectorBeta extends GameBeta {
     private Turtle turtle;
     private ActorBeta starfish;
+    private ActorBeta shark;
     private ActorBeta ocean;
     private ActorBeta winMessage;
-
-    private boolean win;
+    private ActorBeta gameOverMessage;
 
     @Override
     public void inicialize() {
@@ -26,6 +26,11 @@ public class StarfishCollectorBeta extends GameBeta {
         starfish.setPosition(380,380);
         mainStage.addActor(starfish);
 
+        shark = new ActorBeta();
+        shark.setTexture(new Texture(Gdx.files.internal("assets/sharky.png")));
+        shark.setPosition(190,190);
+        mainStage.addActor(shark);
+
         turtle = new Turtle();
         turtle.setTexture(new Texture(Gdx.files.internal("assets/turtle-1.png")));
         turtle.setPosition(20,20);
@@ -37,7 +42,11 @@ public class StarfishCollectorBeta extends GameBeta {
         winMessage.setVisible(false);
         mainStage.addActor(winMessage);
 
-        win = false;
+        gameOverMessage = new ActorBeta();
+        gameOverMessage.setTexture(new Texture(Gdx.files.internal("assets/game-over.png")));
+        gameOverMessage.setPosition(180,180);
+        gameOverMessage.setVisible(false);
+        mainStage.addActor(gameOverMessage);
     }
 
     @Override
@@ -46,7 +55,15 @@ public class StarfishCollectorBeta extends GameBeta {
         if (turtle.overlaps(starfish)) {
             starfish.remove();
             turtle.remove();
+            shark.remove();
             winMessage.setVisible(true);
+        }
+
+        if (turtle.overlaps(shark)) {
+            shark.remove();
+            turtle.remove();
+            starfish.remove();
+            gameOverMessage.setVisible(true);
         }
     }
 }
