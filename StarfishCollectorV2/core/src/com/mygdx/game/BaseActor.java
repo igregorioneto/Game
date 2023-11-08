@@ -3,14 +3,13 @@ package com.mygdx.game;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Texture;
+import com.badlogic.gdx.graphics.Texture.TextureFilter;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.Batch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.Stage;
 import com.badlogic.gdx.utils.Array;
-
-import java.util.ArrayList;
 
 public class BaseActor extends Actor {
     private Animation<TextureRegion> animation;
@@ -29,57 +28,48 @@ public class BaseActor extends Actor {
         elapsedTime = 0;
         animationPaused = false;
     }
-
-    // Set the animation
-    public void setAnimation(Animation<TextureRegion> anim) {
-        animation = anim;
-        TextureRegion tr = animation.getKeyFrame(0);
-        float w = tr.getRegionWidth();
-        float h = tr.getRegionHeight();
-        setScale(w, h);
-        setOrigin(w / 2, h / 2);
-    }
-
     // Paused Animation
     public void setAnimationPaused(boolean paused) {
         animationPaused = paused;
     }
 
-    // Long animation has been playing
-    public void act(float dt) {
-        super.act(dt);
+    /**
+     * Sets the animation used when rendering this actor; also sets actor size.
+     * @param anim animation that will be drawn when actor is rendered
+     */
+    public void setAnimation(Animation<TextureRegion> anim)
+    {
+        animation = anim;
+        TextureRegion tr = animation.getKeyFrame(0);
+        float w = tr.getRegionWidth();
+        float h = tr.getRegionHeight();
+        setSize( w, h );
+        setOrigin( w/2, h/2 );
 
-        if (!animationPaused)
-            elapsedTime += dt;
     }
 
-    @Override
-    public void draw(Batch batch, float parentAlpha) {
-        super.draw(batch, parentAlpha);
-
-        // apply color tint effect
-        Color c = getColor();
-        batch.setColor(c.r, c.g, c.b, c.a);
-
-        if (animation != null && isVisible())
-            batch.draw(animation.getKeyFrame(elapsedTime),
-                    getX(), getY(), getOriginX(), getOriginY(),
-                    getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation());
-    }
-
-    public Animation<TextureRegion> loadAnimationFromFiles(
-            String[] fileNames, float frameDuration, boolean loop) {
+    /**
+     * Creates an animation from images stored in separate files.
+     * @param fileNames array of names of files containing animation images
+     * @param frameDuration how long each frame should be displayed
+     * @param loop should the animation loop
+     * @return animation created (useful for storing multiple animations)
+     */
+    public Animation<TextureRegion> loadAnimationFromFiles(String[] fileNames, float frameDuration, boolean loop)
+    {
         int fileCount = fileNames.length;
-        Array<TextureRegion> textureArray = new Array<>();
+        Array<TextureRegion> textureArray = new Array<TextureRegion>();
 
-        for (int i = 0; i < fileCount; i++) {
-            String fileName = fileNames[i];
-            Texture texture = new Texture(Gdx.files.internal(fileName));
-            texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-            textureArray.add(new TextureRegion(texture));
+        for (int n = 0; n < fileCount; n++)
+        {
+            String fileName = fileNames[n];
+            Texture texture = new Texture( Gdx.files.internal(fileName) );
+            texture.setFilter( TextureFilter.Linear, TextureFilter.Linear );
+            textureArray.add( new TextureRegion( texture ) );
         }
 
-        Animation<TextureRegion> anim = new Animation<>(frameDuration, textureArray);
+        Animation<TextureRegion> anim = new Animation<TextureRegion>(frameDuration, textureArray);
+
         if (loop)
             anim.setPlayMode(Animation.PlayMode.LOOP);
         else
@@ -91,39 +81,50 @@ public class BaseActor extends Actor {
         return anim;
     }
 
-    public Animation<TextureRegion> loadAnimationFromSheet(
-            String fileName, int rows, int cols, float frameDuration, boolean loop
-    ) {
-        Texture texture = new Texture(Gdx.files.internal(fileName));
-        texture.setFilter(Texture.TextureFilter.Linear, Texture.TextureFilter.Linear);
-        int frameWidth = texture.getWidth() / rows;
-        int framwHeight = texture.getHeight() / cols;
+    /**
+     * Creates an animation from a spritesheet: a rectangular grid of images stored in a single file.
+     * @param fileName name of file containing spritesheet
+     * @param rows number of rows of images in spritesheet
+     * @param cols number of columns of images in spritesheet
+     * @param frameDuration how long each frame should be displayed
+     * @param loop should the animation loop
+     * @return animation created (useful for storing multiple animations)
+     */
+    public Animation<TextureRegion> loadAnimationFromSheet(String fileName, int rows, int cols, float frameDuration, boolean loop)
+    {
+        Texture texture = new Texture(Gdx.files.internal(fileName), true);
+        texture.setFilter(TextureFilter.Linear, TextureFilter.Linear);
+        int frameWidth = texture.getWidth() / cols;
+        int frameHeight = texture.getHeight() / rows;
 
-        TextureRegion[][] temp = TextureRegion.split(texture, frameWidth, framwHeight);
+        TextureRegion[][] temp = TextureRegion.split(texture, frameWidth, frameHeight);
 
-        Array<TextureRegion> textureArray = new Array<>();
+        Array<TextureRegion> textureArray = new Array<TextureRegion>();
 
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < cols; j++) {
-                textureArray.add(temp[i][j]);
-            }
-        }
+        for (int r = 0; r < rows; r++)
+            for (int c = 0; c < cols; c++)
+                textureArray.add( temp[r][c] );
 
-        Animation<TextureRegion> anim = new Animation<>(frameDuration, textureArray);
+        Animation<TextureRegion> anim = new Animation<TextureRegion>(frameDuration, textureArray);
 
         if (loop)
             anim.setPlayMode(Animation.PlayMode.LOOP);
         else
             anim.setPlayMode(Animation.PlayMode.NORMAL);
 
-        if (animation == null) {
+        if (animation == null)
             setAnimation(anim);
-        }
 
         return anim;
     }
 
-    public Animation<TextureRegion> loadTexture(String fileName) {
+    /**
+     *  Convenience method for creating a 1-frame animation from a single texture.
+     *  @param fileName names of image file
+     *  @return animation created (useful for storing multiple animations)
+     */
+    public Animation<TextureRegion> loadTexture(String fileName)
+    {
         String[] fileNames = new String[1];
         fileNames[0] = fileName;
         return loadAnimationFromFiles(fileNames, 1, true);
@@ -131,6 +132,27 @@ public class BaseActor extends Actor {
 
     public boolean isAnimationFinished() {
         return animation.isAnimationFinished(elapsedTime);
+    }
+
+    // Long animation has been playing
+    public void act(float dt) {
+        super.act(dt);
+
+        if (!animationPaused)
+            elapsedTime += dt;
+    }
+
+    public void draw(Batch batch, float parentAlpha) {
+        super.draw( batch, parentAlpha );
+
+        // apply color tint effect
+        Color c = getColor();
+        batch.setColor(c.r, c.g, c.b, c.a);
+
+        if ( animation != null && isVisible() )
+            batch.draw( animation.getKeyFrame(elapsedTime),
+                    getX(), getY(), getOriginX(), getOriginY(),
+                    getWidth(), getHeight(), getScaleX(), getScaleY(), getRotation() );
     }
 
 }

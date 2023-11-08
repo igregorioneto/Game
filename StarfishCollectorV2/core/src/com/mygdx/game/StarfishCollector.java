@@ -1,6 +1,6 @@
 package com.mygdx.game;
 
-public class StarfishCollector extends GameBeta{
+public class StarfishCollector extends GameBeta {
     private Turtle turtle;
     private Starfish starfish;
     private BaseActor ocean;
