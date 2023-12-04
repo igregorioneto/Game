@@ -46,8 +46,8 @@ public class SplashScreen implements Screen {
         batch.begin();
 
         // Desenhando o Logo
-        batch.draw(logo, 0.1f * Gdx.graphics.getWidth(), 0.3f * Gdx.graphics.getHeight(),
-                0.8f * Gdx.graphics.getWidth(), 0.8f * Gdx.graphics.getHeight());
+        batch.draw(logo, 0.1f * Gdx.graphics.getWidth() , 0.3f * Gdx.graphics.getHeight(),
+                0.8f * Gdx.graphics.getWidth(), 0.8f * Gdx.graphics.getWidth());
 
         batch.draw(barra, 0.1f * Gdx.graphics.getWidth(),
                 0.15f * Gdx.graphics.getHeight(),
