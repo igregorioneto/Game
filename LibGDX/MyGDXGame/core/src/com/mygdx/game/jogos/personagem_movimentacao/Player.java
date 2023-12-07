@@ -6,12 +6,14 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Player {
-    private int personX, personY, speed;
+    private int personX, personY, speed, width, height;
 
     public Player() {
         personX = 0;
         personY = 0;
         speed = 5;
+        width = 50;
+        height = 50;
     }
 
     /*
@@ -27,7 +29,7 @@ public class Player {
         shapeRenderer.setColor(Color.RED);
         // para a forma ser preenchida, caso queira somente as bordas usar o 'ShapeRenderer.ShapeType.Line'
         shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.rect(personX,personY, 50,50);
+        shapeRenderer.rect(personX,personY, width,height);
         shapeRenderer.end();
     }
 
@@ -47,4 +49,23 @@ public class Player {
             personX += speed;
     }
 
+    public int getPersonX() {
+        return personX;
+    }
+
+    public int getPersonY() {
+        return personY;
+    }
+
+    public int getSpeed() {
+        return speed;
+    }
+
+    public int getWidth() {
+        return width;
+    }
+
+    public int getHeight() {
+        return height;
+    }
 }
