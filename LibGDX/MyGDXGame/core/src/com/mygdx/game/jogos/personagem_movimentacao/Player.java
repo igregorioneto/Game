@@ -4,16 +4,20 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public class Player {
-    private int personX, personY, speed, width, height;
+import java.awt.*;
+
+public class Player extends Actor {
+    private int speed;
 
     public Player() {
-        personX = 0;
-        personY = 0;
+        setX(0);
+        setY(0);
+        setWidth(50);
+        setHeight(50);
+
         speed = 5;
-        width = 50;
-        height = 50;
     }
 
     /*
@@ -29,7 +33,7 @@ public class Player {
         shapeRenderer.setColor(Color.RED);
         // para a forma ser preenchida, caso queira somente as bordas usar o 'ShapeRenderer.ShapeType.Line'
         shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.rect(personX,personY, width,height);
+        shapeRenderer.rect(getX(),getY(), getWidth(),getHeight());
         shapeRenderer.end();
     }
 
@@ -40,32 +44,16 @@ public class Player {
      * */
     private void movimentacaoPlayer() {
         if (Gdx.input.isKeyPressed(Input.Keys.UP))
-            personY += speed;
+            setY(getY() + speed);
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN))
-            personY -= speed;
+            setY(getY() - speed);
         if (Gdx.input.isKeyPressed(Input.Keys.LEFT))
-            personX -= speed;
+            setX(getX() - speed);
         if (Gdx.input.isKeyPressed(Input.Keys.RIGHT))
-            personX += speed;
-    }
-
-    public int getPersonX() {
-        return personX;
-    }
-
-    public int getPersonY() {
-        return personY;
+            setX(getX() + speed);
     }
 
     public int getSpeed() {
         return speed;
-    }
-
-    public int getWidth() {
-        return width;
-    }
-
-    public int getHeight() {
-        return height;
     }
 }

@@ -2,13 +2,14 @@ package com.mygdx.game.jogos.personagem_movimentacao;
 
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.scenes.scene2d.Actor;
 
-public class Obstacle {
-    private float x, y, radius;
+public class Obstacle extends Actor {
+    private float radius;
 
     public Obstacle(int x, int y) {
-        this.x = x;
-        this.y = y;
+        setX(x);
+        setY(y);
         radius = 20;
     }
 
@@ -21,16 +22,8 @@ public class Obstacle {
         shapeRenderer.begin();
         shapeRenderer.setColor(Color.BLUE);
         shapeRenderer.set(ShapeRenderer.ShapeType.Filled);
-        shapeRenderer.circle(x, y, radius);
+        shapeRenderer.circle(getX(), getY(), radius);
         shapeRenderer.end();
-    }
-
-    public float getX() {
-        return x;
-    }
-
-    public float getY() {
-        return y;
     }
 
     public float getRadius() {
