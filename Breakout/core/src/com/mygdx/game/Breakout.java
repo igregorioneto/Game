@@ -15,6 +15,7 @@ import java.util.Random;
 public class Breakout extends ApplicationAdapter {
 	private ShapeRenderer shape;
 	private Ball ball;
+	private Paddle paddle;
 	private Random r = new Random();
 	
 	@Override
@@ -25,16 +26,19 @@ public class Breakout extends ApplicationAdapter {
 						15,
 						3,
 						3);
+		paddle = new Paddle(50, 50, 80,10);
 	}
 
 	@Override
 	public void render () {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-		shape.begin(ShapeRenderer.ShapeType.Filled);
 		ball.update();
-		ball.draw(shape);
+		paddle.update();
 
+		shape.begin(ShapeRenderer.ShapeType.Filled);
+		ball.draw(shape);
+		paddle.draw(shape);
 		shape.end();
 	}
 }
