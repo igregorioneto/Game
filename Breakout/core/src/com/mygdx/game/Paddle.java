@@ -4,10 +4,10 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Paddle {
-    private int x;
-    private int y;
-    private int width;
-    private int height;
+    int x;
+    int y;
+    int width;
+    int height;
 
     public Paddle(int x, int y, int width, int height) {
         this.x = x;
@@ -17,7 +17,6 @@ public class Paddle {
     }
 
     public void update() {
-        System.out.println("cursor: " + Gdx.input.getX());
         x = Gdx.input.getX();
         if (x < 0)
             x = 0;
