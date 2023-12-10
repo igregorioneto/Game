@@ -22,9 +22,9 @@ public class Ball {
         x += xSpeed;
         y += ySpeed;
 
-        if (x < 0 || x > Gdx.graphics.getWidth())
+        if (x - size < 0 || x > Gdx.graphics.getWidth() - size)
             xSpeed = -xSpeed;
-        if (y < 0 || y > Gdx.graphics.getHeight())
+        if (y - size < 0 || y > Gdx.graphics.getHeight() - size)
             ySpeed = -ySpeed;
     }
 

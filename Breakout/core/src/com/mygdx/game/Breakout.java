@@ -23,8 +23,8 @@ public class Breakout extends ApplicationAdapter {
 		ball = new Ball(r.nextInt(Gdx.graphics.getWidth()),
 				r.nextInt(Gdx.graphics.getHeight()),
 						15,
-						5,
-						5);
+						3,
+						3);
 	}
 
 	@Override
