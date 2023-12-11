@@ -4,18 +4,13 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-public class Ball {
-    private int x;
-    private int y;
-    private int size;
+public class Ball extends BaseEntity {
     private int xSpeed;
     private int ySpeed;
     private Color color = Color.WHITE;
 
     public Ball(int x, int y, int size, int xSpeed, int ySpeed) {
-        this.x = x;
-        this.y = y;
-        this.size = size;
+        super(x, y, size);
         this.xSpeed = xSpeed;
         this.ySpeed = ySpeed;
     }
