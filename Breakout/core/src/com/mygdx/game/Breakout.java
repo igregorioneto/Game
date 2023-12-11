@@ -16,6 +16,7 @@ public class Breakout extends ApplicationAdapter {
 	private ShapeRenderer shape;
 	private Ball ball;
 	private Paddle paddle;
+	private ArrayList<Block> blocks = new ArrayList<>();
 	private Random r = new Random();
 	
 	@Override
@@ -27,6 +28,13 @@ public class Breakout extends ApplicationAdapter {
 						3,
 						3);
 		paddle = new Paddle(50, 50, 80,10);
+
+		int blockWidth = 60, blockHeight = 20;
+		for (int y = Gdx.graphics.getHeight()/2; y < Gdx.graphics.getHeight() ; y += blockHeight + 10) {
+			for (int x = 0; x < Gdx.graphics.getWidth() ; x += blockWidth + 10) {
+				blocks.add(new Block(x, y, blockWidth, blockHeight));
+			}
+		}
 	}
 
 	@Override
@@ -39,6 +47,9 @@ public class Breakout extends ApplicationAdapter {
 		ball.checkCollision(paddle);
 
 		shape.begin(ShapeRenderer.ShapeType.Filled);
+		for (Block block:blocks) {
+			block.draw(shape);
+		}
 		ball.draw(shape);
 		paddle.draw(shape);
 		shape.end();
