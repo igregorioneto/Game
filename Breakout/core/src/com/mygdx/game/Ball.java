@@ -39,7 +39,20 @@ public class Ball extends BaseEntity {
         }
     }
 
+    public void checkColision(Block block) {
+        if (collideWith(block)) {
+            ySpeed = -ySpeed;
+            block.destroyed = true;
+        }
+    }
+
     private boolean collideWith(Paddle paddle) {
-        return x - size <= paddle.x + paddle.width && y - size <= paddle.y + paddle.height;
+        return (x - size >= paddle.x && x - size <= paddle.x + paddle.width)
+                && (y - size >= paddle.y && y - size <= paddle.y + paddle.height);
+    }
+
+    private boolean collideWith(Block block) {
+        return (x + size >= block.x && x + size <= block.x + block.width)
+                && (y + size >= block.y && y + size <= block.y + block.height );
     }
 }

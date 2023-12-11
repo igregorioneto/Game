@@ -3,7 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 public class Block extends BaseEntity {
-
+    boolean destroyed = false;
     public Block(int x, int y, int width, int height) {
         super(x, y, width, height);
     }

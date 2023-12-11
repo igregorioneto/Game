@@ -22,9 +22,9 @@ public class Breakout extends ApplicationAdapter {
 	@Override
 	public void create () {
 		shape = new ShapeRenderer();
-		ball = new Ball(r.nextInt(Gdx.graphics.getWidth()),
-				r.nextInt(Gdx.graphics.getHeight()),
-						15,
+		ball = new Ball(r.nextInt(Gdx.graphics.getWidth() / 2),
+				r.nextInt(Gdx.graphics.getHeight() / 2),
+						8,
 						3,
 						3);
 		paddle = new Paddle(50, 50, 80,10);
@@ -47,11 +47,20 @@ public class Breakout extends ApplicationAdapter {
 		ball.checkCollision(paddle);
 
 		shape.begin(ShapeRenderer.ShapeType.Filled);
+		ball.draw(shape);
 		for (Block block:blocks) {
 			block.draw(shape);
 		}
-		ball.draw(shape);
 		paddle.draw(shape);
 		shape.end();
+
+		for (int i = 0; i < blocks.size(); i++) {
+			Block b = blocks.get(i);
+			ball.checkColision(b);
+//			if (b.destroyed) {
+//				blocks.remove(b);
+//				i--;
+//			}
+		}
 	}
 }
