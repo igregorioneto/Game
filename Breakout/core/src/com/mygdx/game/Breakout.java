@@ -57,10 +57,10 @@ public class Breakout extends ApplicationAdapter {
 		for (int i = 0; i < blocks.size(); i++) {
 			Block b = blocks.get(i);
 			ball.checkColision(b);
-//			if (b.destroyed) {
-//				blocks.remove(b);
-//				i--;
-//			}
+			if (b.destroyed) {
+				blocks.remove(b);
+				i--;
+			}
 		}
 	}
 }
