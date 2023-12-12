@@ -46,7 +46,7 @@ public class PingPong extends ApplicationAdapter {
 				Gdx.graphics.getHeight() / 2 - 80 / 2, 10, 80, true);
 
 		// Computer
-		computer = new Paddle(Gdx.graphics.getWidth() - 10,
+		computer = new Paddle(Gdx.graphics.getWidth() - 20,
 				Gdx.graphics.getHeight() / 2 - 80 / 2, 10, 80, false);
 	}
 
@@ -69,6 +69,7 @@ public class PingPong extends ApplicationAdapter {
 		computer.draw(shape);
 		shape.end();
 
+		ball.colisionWith(player);
 	}
 
 	/*

@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 /*
@@ -11,6 +12,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
  * */
 public class Ball extends BaseEntity{
     int xSpeed, ySpeed;
+    private Color color = new Color(Color.WHITE);
 
     public Ball(int x, int y, int size, int xSpeed, int ySpeed) {
         super(x, y, size);
@@ -41,6 +43,18 @@ public class Ball extends BaseEntity{
      * */
     public void draw(ShapeRenderer shape) {
         shape.circle(x, y, size);
+    }
+
+    public void colisionWith(Paddle paddle) {
+        if (collision(paddle)) {
+            Gdx.app.log("Log", "Colidindo com a bola!");
+            color.set(Color.GREEN);
+            xSpeed = -xSpeed;
+        }
+    }
+
+    private boolean collision(Paddle paddle) {
+        return (x - size * 2 <= paddle.x) && (y + size >= paddle.y && y <= paddle.y + paddle.height);
     }
 
 }
