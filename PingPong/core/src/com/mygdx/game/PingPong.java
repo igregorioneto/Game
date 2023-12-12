@@ -20,6 +20,8 @@ import java.util.Random;
 public class PingPong extends ApplicationAdapter {
 	private ShapeRenderer shape;
 	private Ball ball;
+	private Paddle player;
+	private Paddle computer;
 
 	private Random random = new Random();
 
@@ -38,6 +40,14 @@ public class PingPong extends ApplicationAdapter {
 				8,
 				3,
 				3);
+
+		// Player
+		player = new Paddle(10,
+				Gdx.graphics.getHeight() / 2 - 80 / 2, 10, 80, true);
+
+		// Computer
+		computer = new Paddle(Gdx.graphics.getWidth() - 10,
+				Gdx.graphics.getHeight() / 2 - 80 / 2, 10, 80, false);
 	}
 
 	/*
@@ -50,9 +60,13 @@ public class PingPong extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		ball.update();
+		player.update();
+		computer.update();
 
 		shape.begin(ShapeRenderer.ShapeType.Filled);
 		ball.draw(shape);
+		player.draw(shape);
+		computer.draw(shape);
 		shape.end();
 
 	}
