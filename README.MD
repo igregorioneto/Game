@@ -57,3 +57,36 @@ O projeto "Jogo Breakout com libgdx e Java" é uma aplicação prática dos conh
 - **Java:** Linguagem de programação principal.
 - **libgdx:** Biblioteca de desenvolvimento de jogos.
 - **Git:** Sistema de controle de versão para colaboração e rastreamento de alterações.
+
+
+---
+
+# Projeto Ping Pong com libgdx e Java
+
+## Descrição
+O projeto "Ping Pong com libgdx e Java" é uma aplicação prática dos conhecimentos adquiridos no estudo da libgdx, onde os participantes serão guiados na construção passo a passo de um jogo de Ping Pong. Este projeto proporciona a oportunidade de aplicar conceitos fundamentais da libgdx no desenvolvimento de um jogo interativo e envolvente.
+
+## Recursos Principais
+- Implementação completa de um jogo de Ping Pong.
+- Aplicação dos conceitos aprendidos no estudo da libgdx, incluindo gráficos, entrada do usuário e gerenciamento de cenários.
+- Discussões sobre otimização de desempenho e resolução de desafios específicos do desenvolvimento de jogos.
+
+## Tópicos de Implementação
+1. **Configuração do Projeto:**
+   - Inicialização do projeto utilizando as configurações aprendidas no estudo da libgdx.
+
+2. **Desenvolvimento do Jogo:**
+   - Implementação dos elementos do jogo, como paletas, bola e lógica de colisão.
+
+3. **Controles do Usuário:**
+   - Integração de controles do usuário para movimentar as paletas.
+
+4. **Pontuação e Finalização:**
+   - Adição de um sistema de pontuação e lógica para finalização do jogo.
+
+## Tecnologias Utilizadas
+- **Java:** Linguagem de programação principal.
+- **libgdx:** Biblioteca de desenvolvimento de jogos.
+- **Git:** Sistema de controle de versão para colaboração e rastreamento de alterações.
+
+---
