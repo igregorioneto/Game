@@ -11,11 +11,17 @@ public class Paddle extends BaseEntity {
         this.player = player;
     }
 
-    public void update() {
+    public void update(Ball ball) {
+        // Player
         if (Gdx.input.isKeyPressed(Input.Keys.UP) && y + height <= Gdx.graphics.getHeight() && player)
             y+= 5;
         if (Gdx.input.isKeyPressed(Input.Keys.DOWN) && y >= 0 && player)
             y-=5;
+
+        // Computer
+        if (!player) {
+            y = ball.y;
+        }
     }
 
     public void draw(ShapeRenderer shape) {

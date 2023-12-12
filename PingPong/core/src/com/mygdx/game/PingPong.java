@@ -60,8 +60,8 @@ public class PingPong extends ApplicationAdapter {
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
 		ball.update();
-		player.update();
-		computer.update();
+		player.update(ball);
+		computer.update(ball);
 
 		shape.begin(ShapeRenderer.ShapeType.Filled);
 		ball.draw(shape);
