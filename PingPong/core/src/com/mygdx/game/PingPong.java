@@ -70,6 +70,7 @@ public class PingPong extends ApplicationAdapter {
 		shape.end();
 
 		ball.colisionWith(player);
+		ball.colisionWith(computer);
 	}
 
 	/*

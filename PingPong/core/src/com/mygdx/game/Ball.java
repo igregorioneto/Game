@@ -54,7 +54,11 @@ public class Ball extends BaseEntity{
     }
 
     private boolean collision(Paddle paddle) {
-        return (x - size * 2 <= paddle.x) && (y + size >= paddle.y && y <= paddle.y + paddle.height);
+        if (paddle.player) {
+            return (x - size * 2 <= paddle.x) && (y + size >= paddle.y && y <= paddle.y + paddle.height);
+        } else {
+            return (x + size >= paddle.x) && (y + size >= paddle.y && y <= paddle.y + paddle.height);
+        }
     }
 
 }
