@@ -1,4 +1,7 @@
-# Projetos
+# Jogos
+
+<details>
+<summary>Projeto 1: LibGDX - LibGDX</summary>
 
 ## Projeto 1: LibGDX
 
@@ -28,7 +31,10 @@ O projeto "LibGDX" tem como objetivo proporcionar uma compreensão aprofundada d
 - **libgdx:** Biblioteca de desenvolvimento de jogos para Java, oferecendo recursos poderosos para criação de jogos multiplataforma.
 - **Git:** Sistema de controle de versão para colaboração e rastreamento de alterações.
 
----
+</details>
+
+<details>
+<summary>Jogo Breakout com libgdx e Java - Breakout</summary>
 
 ## Projeto 2: Jogo Breakout com libgdx e Java
 
@@ -58,20 +64,22 @@ O projeto "Jogo Breakout com libgdx e Java" é uma aplicação prática dos conh
 - **libgdx:** Biblioteca de desenvolvimento de jogos.
 - **Git:** Sistema de controle de versão para colaboração e rastreamento de alterações.
 
+</details>
 
----
+<details>
+<summary>Projeto Ping Pong com libgdx e Java - PingPong</summary>
 
-# Projeto Ping Pong com libgdx e Java
+## Projeto Ping Pong com libgdx e Java
 
-## Descrição
+### Descrição
 O projeto "Ping Pong com libgdx e Java" é uma aplicação prática dos conhecimentos adquiridos no estudo da libgdx, onde os participantes serão guiados na construção passo a passo de um jogo de Ping Pong. Este projeto proporciona a oportunidade de aplicar conceitos fundamentais da libgdx no desenvolvimento de um jogo interativo e envolvente.
 
-## Recursos Principais
+### Recursos Principais
 - Implementação completa de um jogo de Ping Pong.
 - Aplicação dos conceitos aprendidos no estudo da libgdx, incluindo gráficos, entrada do usuário e gerenciamento de cenários.
 - Discussões sobre otimização de desempenho e resolução de desafios específicos do desenvolvimento de jogos.
 
-## Tópicos de Implementação
+### Tópicos de Implementação
 1. **Configuração do Projeto:**
    - Inicialização do projeto utilizando as configurações aprendidas no estudo da libgdx.
 
@@ -84,9 +92,42 @@ O projeto "Ping Pong com libgdx e Java" é uma aplicação prática dos conhecim
 4. **Pontuação e Finalização:**
    - Adição de um sistema de pontuação e lógica para finalização do jogo.
 
-## Tecnologias Utilizadas
+### Tecnologias Utilizadas
 - **Java:** Linguagem de programação principal.
 - **libgdx:** Biblioteca de desenvolvimento de jogos.
 - **Git:** Sistema de controle de versão para colaboração e rastreamento de alterações.
 
----
+</details>
+
+<details>
+<summary>Projeto SpaceShooter com Lua e Defold - SpaceShooter</summary>
+
+## Projeto SpaceShooter com Lua e Defold
+
+### Descrição
+O projeto "SpaceShooter" é um jogo desenvolvido com a linguagem de programação Lua e a engine Defold. Este projeto visa explorar os conceitos fundamentais de desenvolvimento de jogos utilizando essas tecnologias, proporcionando aos participantes uma experiência prática na criação de um Space Shooter interativo e envolvente.
+
+### Recursos Principais
+- Implementação completa de um jogo Space Shooter.
+- Utilização dos recursos oferecidos pela engine Defold para gráficos, física e lógica de jogo.
+- Discussões sobre as práticas recomendadas ao desenvolver jogos com Lua e Defold.
+
+### Tópicos de Implementação
+1. **Configuração do Projeto:**
+   - Instalação e configuração do ambiente de desenvolvimento para Lua e Defold.
+
+2. **Desenvolvimento do Jogo:**
+   - Implementação dos elementos do Space Shooter, como nave espacial, inimigos, tiros e explosões.
+
+3. **Controles do Usuário:**
+   - Integração de controles do usuário para movimentar a nave e atirar.
+
+4. **Pontuação e Desafios:**
+   - Adição de um sistema de pontuação e introdução de desafios progressivos.
+
+### Tecnologias Utilizadas
+- **Lua:** Linguagem de programação principal para o desenvolvimento do projeto.
+- **Defold:** Engine de desenvolvimento de jogos que oferece recursos para criação de jogos 2D multiplataforma.
+- **Git:** Sistema de controle de versão para colaboração e rastreamento de alterações.
+
+</details>
