@@ -60,17 +60,31 @@ function movimentacao_nave(self, dt)
 		else
 			msg.post('#ship', 'play_animation', { id = hash('indle') })
 		end
-		
-		if new_position.y > self.screen_bottom then
-			new_position.y = self.screen_bottom
-		end
-		if new_position.y < self.screen_top then
-			new_position.y = self.screen_top
+
+		if self.direction.y < 0 then
+			msg.post('#front1', 'play_animation', { id = hash('front') })
+			msg.post('#front2', 'play_animation', { id = hash('front') })
+			msg.post('#jet', 'play_animation', { id = hash('no_jet') })
+			if new_position.y < self.screen_top then
+				new_position.y = self.screen_top
+			end
+		elseif self.direction.y > 0 then
+			msg.post('#front1', 'play_animation', { id = hash('no_front') })
+			msg.post('#front2', 'play_animation', { id = hash('no_front') })	
+			msg.post('#jet', 'play_animation', { id = hash('jet') })
+			if new_position.y > self.screen_bottom then
+				new_position.y = self.screen_bottom
+			end
 		end
 		-- Setando a posição atual
 		go.set_position(new_position)
 
 		self.direction = vmath.vector3()
+	else
+		msg.post('#front1', 'play_animation', { id = hash('no_front') })
+		msg.post('#front2', 'play_animation', { id = hash('no_front') })
+		msg.post('#ship', 'play_animation', { id = hash('indle') })
+		msg.post('#jet', 'play_animation', { id = hash('no_jet') })
 	end
 end
 

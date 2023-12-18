@@ -120,3 +120,63 @@ embedded_components {
     w: 1.0
   }
 }
+embedded_components {
+  id: "jet"
+  type: "sprite"
+  data: "tile_set: \"/ship/ship.atlas\"\n"
+  "default_animation: \"jet\"\n"
+  "material: \"/builtins/materials/sprite.material\"\n"
+  "blend_mode: BLEND_MODE_ALPHA\n"
+  ""
+  position {
+    x: 0.0
+    y: -57.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.0
+    w: 1.0
+  }
+}
+embedded_components {
+  id: "front1"
+  type: "sprite"
+  data: "tile_set: \"/ship/ship.atlas\"\n"
+  "default_animation: \"front\"\n"
+  "material: \"/builtins/materials/sprite.material\"\n"
+  "blend_mode: BLEND_MODE_ALPHA\n"
+  ""
+  position {
+    x: 27.0
+    y: 11.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.47160032
+    w: 0.8818124
+  }
+}
+embedded_components {
+  id: "front2"
+  type: "sprite"
+  data: "tile_set: \"/ship/ship.atlas\"\n"
+  "default_animation: \"front\"\n"
+  "material: \"/builtins/materials/sprite.material\"\n"
+  "blend_mode: BLEND_MODE_ALPHA\n"
+  ""
+  position {
+    x: -28.0
+    y: 10.0
+    z: 0.0
+  }
+  rotation {
+    x: 0.0
+    y: 0.0
+    z: 0.86434525
+    w: 0.5028989
+  }
+}
